@@ -1,10 +1,13 @@
-#include <MKL25Z4.H>
+#include <MKL25Z4.h>
 #include "SysTick.h"
 
 /* ------------------------------------------
-       ECS642 Lab1 2017
+       ECS642/ECS714 Lab Work
 
-   SysTick timer. Not explained in week 1
+   SysTick timer functions
+     * Init_SysTick  - set interrupt frequency
+     * Interrupt handler
+     * waitSysTickCounter - the delay function
   -------------------------------------------- */
 
 /*----------------------------------------------------------------------------

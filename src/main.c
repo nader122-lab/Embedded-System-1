@@ -29,9 +29,9 @@
  -------------------------------------- */
  
  /*----------------------------------------------------------------------------
- * nextRand: get next random number 
- *   Based on https://en.wikipedia.org/wiki/Linear_congruential_generator
- * --------------------------------------------------------------------------- */
+  * nextRand: get next random number 
+  *   Based on https://en.wikipedia.org/wiki/Linear_congruential_generator
+  * --------------------------------------------------------------------------- */
 uint32_t seed = 0x12345678 ;
 
 // Returns a 32 bit number which is too long for us
@@ -52,7 +52,8 @@ uint32_t randCount() {
    Task: randomPressTask
 
    Generate a signal at random intervals between 5 and 15 sec
-*----------------------------------------------------------------------------*/
+   DO NOT CHANGE
+ *----------------------------------------------------------------------------*/
 #define UP 0
 #define DOWN 1
 #define DOWNCOUNT 20
@@ -90,7 +91,9 @@ void randomPressTask() {
 /*----------------------------------------------------------------------------
    Task: toggleBlue
 
-   Toggle blue lED on every signal
+   Toggle blue LED on every signal
+
+   REPLACE THIS TASK
 *----------------------------------------------------------------------------*/
 
 #define BLUEOFF 0
@@ -130,14 +133,14 @@ void toggleBlueTask() {
  *----------------------------------------------------------------------------*/
 int main (void) {
     configureLEDs() ;     // configure the GPIO outputs for the LED
-    Init_SysTick(1000) ;  // initialse SysTick every 1ms
-    initRandomPressTask() ;
-    initToggleBlueTask() ;
-    waitSysTickCounter(10) ;
+    Init_SysTick(1000) ;  // initialse SysTick every 1 ms
+    initRandomPressTask() ;  // initialise task state
+    initToggleBlueTask() ;   // initialise task state
+    waitSysTickCounter(10) ;  // initialise delay counter
     while (1) {      // this runs for ever
       randomPressTask() ;  // Generate signals for a simulated button
       toggleBlueTask();    // Toggle blue LED on every press signal
       // delay
-      waitSysTickCounter(10) ;  // cycle every 10 ms - not explained in week 1
+      waitSysTickCounter(10) ;  // cycle every 10 ms 
     }
 }
