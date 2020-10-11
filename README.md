@@ -10,4 +10,4 @@ The behaviour is described by the following state-transition diagram:
 
 ![state transition models of the tasks in lab 2][stm]
 
-[logo]: stm.png "Lab 2 STMs"
+[logo]: https://github.research.its.qmul.ac.uk/ecs642-714-2020/Lab2/stm.png "Lab 2 STMs"
