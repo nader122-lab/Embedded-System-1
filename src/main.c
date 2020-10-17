@@ -96,34 +96,80 @@ void randomPressTask() {
    REPLACE THIS TASK
 *----------------------------------------------------------------------------*/
 
-#define BLUEOFF 0
-#define BLUEON 1
+#define BLUEON 0
+#define REDON 1
+#define BOTHOFF 2
+#define BOTHPAUSE 3
+#define RED 2
+#define BLUE 1
 
-int blueState ;  // this variable holds the current state
+int colourState ;  // this variable holds the current state
+int count = 300; // this variable initialises the 3 second count
+int countPause; // this variable holds the count before initial press
+int colour = BLUE; // this variable holds the current colour
 
 // initial state of task
 void initToggleBlueTask() {
-  blueState = BLUEON ;
+  colourState = BLUEON ;
   setBlueLED(ON) ;
 }
 
-void toggleBlueTask() {
-  switch (blueState) {
-    case BLUEOFF:  
-      if (signalR) {           // signal received
-          signalR = false ;    // acknowledge
-          setBlueLED(ON) ;     // turn off
-          blueState = BLUEON ; // ... the new state
+void toggleColourTask() { 
+	if (count > 0) count -- ; // decrement the counter
+	
+	if(signalR) {                        // signal received  
+		  if(colourState == BOTHPAUSE) {}
+		  else { colourState = BOTHOFF; }
+	}	
+	
+	switch (colourState) { // state names defined above function
+	
+			
+    case BLUEON:  
+          setRedLED(OFF) ;   // set led colour for current state      
+          setBlueLED(ON) ; 
+          if (count == 0) {     // time to change state and reset count 
+          colourState = REDON ; // the next state
+          colour = RED;				  // the next colour		
+          count = 300; 					// reset count timer		
       }
       break ;
 
-    case BLUEON:
-      if (signalR) {            // signal received
-          signalR = false ;     // acknowledge
-          setBlueLED(OFF) ;     // turn off
-          blueState = BLUEOFF ; // ... the new state
+     case REDON:  
+          setRedLED(ON) ;    // set led colour for current state     
+          setBlueLED(OFF) ; 
+          if (count == 0) {      // time to change state and reset count 
+          colourState = BLUEON ; // the next state
+					colour = BLUE;	       // the next colour
+					count = 300;			     // reset count timer		
       }
       break ;
+			
+		case BOTHOFF:
+			    setBlueLED(OFF) ;          // set led colour for current state
+          setRedLED(OFF) ; 
+          countPause = count; 		   // holds count after initian press
+          signalR = false ;	         // acknowledge signal         
+          colourState = BOTHPAUSE ;  // the next state
+		    
+
+      
+      break ;
+			
+		case BOTHPAUSE:
+					
+          if(signalR) {          // signal received second press
+						 signalR = false ;   // acknowledge signal
+						 count = countPause; // copies count from initial press to current count
+             if(colour == RED) {	// determines the current state 					
+                colourState = REDON ; //the next state
+				    	}
+						 else {
+				       	colourState = BLUEON;	// the next state	 
+				    	}
+           }
+      break ;
+		
   }
 }
 
@@ -139,7 +185,7 @@ int main (void) {
     waitSysTickCounter(10) ;  // initialise delay counter
     while (1) {      // this runs for ever
       randomPressTask() ;  // Generate signals for a simulated button
-      toggleBlueTask();    // Toggle blue LED on every press signal
+      toggleColourTask();    // Toggle blue LED on every press signal
       // delay
       waitSysTickCounter(10) ;  // cycle every 10 ms 
     }
