@@ -8,5 +8,6 @@ The code flashes one of the on-board blue LED on the KL25Z development board at 
 
 The behaviour is described by the following state-transition diagram: 
 
+
 ![state transition models of the tasks in lab 2](stm.png)
 <img width="534" alt="LAB2STATE" src="https://media.github.research.its.qmul.ac.uk/user/2315/files/3cc41b80-10a7-11eb-9c44-448f1497c438">
