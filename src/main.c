@@ -129,9 +129,9 @@ void toggleColourTask() {
           setRedLED(OFF) ;   // set led colour for current state      
           setBlueLED(ON) ; 
           if (count == 0) {     // time to change state and reset count 
-          colourState = REDON ; // the next state
-          colour = RED;				  // the next colour		
-          count = 300; 					// reset count timer		
+            colourState = REDON ; // the next state
+            colour = RED;				  // the next colour		
+            count = 300; 					// reset count timer		
       }
       break ;
 
@@ -139,9 +139,9 @@ void toggleColourTask() {
           setRedLED(ON) ;    // set led colour for current state     
           setBlueLED(OFF) ; 
           if (count == 0) {      // time to change state and reset count 
-          colourState = BLUEON ; // the next state
-					colour = BLUE;	       // the next colour
-					count = 300;			     // reset count timer		
+            colourState = BLUEON ; // the next state
+					  colour = BLUE;	       // the next colour
+					  count = 300;			     // reset count timer		
       }
       break ;
 			
