@@ -4,7 +4,7 @@ The code flashes between both of the on-board red and blue LED's on the KL25Z de
 
 There are two tasks:
 
-  1. The 'randomPress' tasks simulates a button press at random intervals.
+  1. The 'randomPress' tasks simulates a button press at random intervals that switches both LED's off.
   1. The 'toogleColour' task toggles the blue and red LED's at 3 second intervals.
 
 The behaviour is described by the following state-transition diagram:  
